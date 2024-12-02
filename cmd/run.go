@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 	"log"
+	"net/url"
 	"strconv"
 	"strings"
 	advent "tikoflano/aoc/lib/aoc"
@@ -10,6 +11,7 @@ import (
 	"tikoflano/aoc/lib/utils"
 	"tikoflano/aoc/problems"
 
+	"github.com/PuerkitoBio/goquery"
 	"github.com/spf13/cobra"
 )
 
@@ -54,10 +56,36 @@ var runCmd = &cobra.Command{
 		output, err := problems.Run(problemToRun.GetSolutionKey(), inputLines)
 		utils.CheckError(err, "Failed to run solution")
 
-		fmt.Println(output)
+		fmt.Printf("Result: %s\n", output)
+
+		// Submit answer
+		if submitAnswer, _ := cmd.Flags().GetBool("submit"); submitAnswer {
+			data := url.Values{}
+			data.Set("level", strconv.Itoa(problemToRun.Number))
+			data.Set("answer", output)
+
+			res, err := aoc.Client.Post(
+				fmt.Sprintf("%s/%d/day/%d/answer", constants.BaseURL, aoc.Year, problemToRun.Day.Number),
+				"application/x-www-form-urlencoded",
+				strings.NewReader(data.Encode()),
+			)
+			utils.CheckError(err, "Error while submitting the answer")
+
+			defer res.Body.Close()
+
+			// Load the HTML document
+			doc, err := goquery.NewDocumentFromReader(res.Body)
+			utils.CheckError(err, "Failed to create HTML document")
+
+			submissionResponse := doc.Find("article").First().Text()
+			submissionResponse = strings.ReplaceAll(submissionResponse, "  ", "\n")
+
+			fmt.Println(submissionResponse)
+		}
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(runCmd)
+	runCmd.Flags().BoolP("submit", "s", false, "submit answer")
 }
