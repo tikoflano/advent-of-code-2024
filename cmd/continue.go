@@ -19,7 +19,7 @@ var continueCmd = &cobra.Command{
 		nextProblem := aoc.NextDay().NextProblem()
 
 		problemFilePath := nextProblem.MakeProblemFile()
-		nextProblem.DownloadInput(aoc.Client)
+		nextProblem.Day.DownloadInput(aoc.Client)
 
 		tplData := struct {
 			Year    int

@@ -19,7 +19,7 @@ var runCmd = &cobra.Command{
 		aoc := advent.NewAdventOfCode(constants.Year)
 		nextProblem := aoc.NextDay().NextProblem()
 
-		input := nextProblem.GetInput()
+		input := nextProblem.Day.GetInput()
 		inputLines := strings.Split(input, "\n")
 		output := problems.Run(inputLines)
 
