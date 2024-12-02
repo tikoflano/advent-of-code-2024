@@ -5,33 +5,14 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "AOC Login",
+            "name": "Advent of Code Debug",
             "type": "go",
             "request": "launch",
             "mode": "auto",
             "program": "${workspaceFolder}//main.go",
             "args": [
-                "login"
-            ]
-        },
-        {
-            "name": "AOC Continue",
-            "type": "go",
-            "request": "launch",
-            "mode": "auto",
-            "program": "${workspaceFolder}//main.go",
-            "args": [
-                "continue"
-            ]
-        },
-        {
-            "name": "AOC Run",
-            "type": "go",
-            "request": "launch",
-            "mode": "auto",
-            "program": "${workspaceFolder}//main.go",
-            "args": [
-                "run"
+                "run",
+                "${fileBasename}"
             ]
         }
     ]

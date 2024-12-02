@@ -1,7 +1,8 @@
 # Advent of Code 2023
 
-Some VSCode's Launch Configurations where defined:
+## Usage
+- Run `go run main.go login` to set the auth cookie
+- Run `go run main.go continue` to setup the next problem, including the code file and the input 
+- Run `go run main.go run` to run the next problem's code
 
-- Run `AOC Login` to set the auth cookie
-- Run `AOC Continue` to setup the next problem, including the code file and the input 
-- Run `AOC Run` to run the next problem's code
+**NOTE**: Use the `Advent of Code Debug` Launch Configuration in VSCode to debug the current problem code file
