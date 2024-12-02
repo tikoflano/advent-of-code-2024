@@ -22,7 +22,7 @@ var runCmd = &cobra.Command{
 		aoc := advent.NewAdventOfCode(constants.Year)
 		problemToRun := aoc.NextDay().NextProblem()
 
-		if args[0] != "" {
+		if len(args) > 0 && args[0] != "" {
 			filename := strings.Split(args[0], ".")[0]
 			parts := strings.Split(filename, "_")
 
