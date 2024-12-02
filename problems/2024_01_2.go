@@ -10,10 +10,6 @@ func Year2024Day1Problem2(input []string) string {
 	var leftList, rightList []int
 
 	for _, line := range input {
-		if strings.Trim(line, " ") == "" {
-			break
-		}
-
 		values := strings.Split(line, "   ")
 
 		valueLeft, _ := strconv.Atoi(values[0])
