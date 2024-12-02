@@ -13,7 +13,13 @@ type Problem struct {
 }
 
 func (problem Problem) String() string {
-	return fmt.Sprint(problem.Day)
+	solved := "⛔"
+
+	if problem.Solved {
+		solved = "⭐"
+	}
+
+	return fmt.Sprintf("Day %d, Problem %d: %s", problem.Day.Number, problem.Number, solved)
 }
 
 func (problem *Problem) getProblemFilePath() string {
