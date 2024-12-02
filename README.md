@@ -1,4 +1,4 @@
-# Advent of Code 2023
+# Advent of Code 2024
 
 ## Usage
 - Run `go run main.go login` to set the auth cookie
