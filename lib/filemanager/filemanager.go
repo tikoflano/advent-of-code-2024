@@ -7,17 +7,18 @@ import (
 	"tikoflano/aoc/lib/utils"
 )
 
-func FileExists(path string) (bool, error) {
+func FileExists(path string) bool {
 	_, err := os.Stat(path)
 	if err == nil {
-		return true, nil
+		return true
 	}
 
 	if os.IsNotExist(err) {
-		return false, nil
+		return false
 	}
 
-	return false, err
+	utils.CheckError(err, "Failed to check if file exists")
+	return false
 }
 
 func GetSessionCookie() string {

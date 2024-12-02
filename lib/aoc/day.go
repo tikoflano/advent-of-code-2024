@@ -50,8 +50,7 @@ func (day *Day) getInputFilePath() string {
 
 func (day *Day) DownloadInput(client *http.Client) {
 	inputFilePath := day.getInputFilePath()
-	exists, err := filemanager.FileExists(inputFilePath)
-	utils.CheckError(err, "Error checking input file")
+	exists := filemanager.FileExists(inputFilePath)
 
 	if !exists {
 		file := filemanager.CreateFile(inputFilePath)
@@ -69,8 +68,12 @@ func (day *Day) DownloadInput(client *http.Client) {
 	}
 }
 
-func (day *Day) GetInput() string {
+func (day *Day) GetInput() (string, bool) {
 	inputFile := day.getInputFilePath()
 
-	return filemanager.ReadFile(inputFile)
+	if !filemanager.FileExists(inputFile) {
+		return "", false
+	}
+
+	return filemanager.ReadFile(inputFile), true
 }

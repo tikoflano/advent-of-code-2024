@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"tikoflano/aoc/lib/constants"
 	"tikoflano/aoc/lib/filemanager"
-	"tikoflano/aoc/lib/utils"
 )
 
 type Problem struct {
@@ -23,8 +22,7 @@ func (problem *Problem) getProblemFilePath() string {
 
 func (problem *Problem) MakeProblemFile() string {
 	problemFilePath := problem.getProblemFilePath()
-	exists, err := filemanager.FileExists(problemFilePath)
-	utils.CheckError(err, "Error checking problem file")
+	exists := filemanager.FileExists(problemFilePath)
 
 	if exists {
 		return problemFilePath

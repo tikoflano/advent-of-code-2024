@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"log"
 	"strings"
 	advent "tikoflano/aoc/lib/aoc"
 	"tikoflano/aoc/lib/constants"
@@ -19,7 +20,12 @@ var runCmd = &cobra.Command{
 		aoc := advent.NewAdventOfCode(constants.Year)
 		nextProblem := aoc.NextDay().NextProblem()
 
-		input := nextProblem.Day.GetInput()
+		input, exists := nextProblem.Day.GetInput()
+
+		if !exists {
+			log.Fatal("Input file not found, run the continue command to get it")
+		}
+
 		inputLines := strings.Split(input, "\n")
 		output := problems.Run(inputLines)
 
