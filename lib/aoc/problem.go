@@ -23,7 +23,7 @@ func (problem Problem) String() string {
 }
 
 func (problem *Problem) getProblemFilePath() string {
-	return fmt.Sprintf("problems/%d_%02d_%d.go", constants.Year, problem.Day.Number, problem.Number)
+	return fmt.Sprintf("problems/%s.go", problem.GetSolutionKey())
 }
 
 func (problem *Problem) MakeProblemFile() string {
@@ -35,18 +35,24 @@ func (problem *Problem) MakeProblemFile() string {
 	}
 
 	tplData := struct {
-		URL     string
-		Year    int
-		Day     int
-		Problem int
+		URL         string
+		Year        int
+		Day         int
+		Problem     int
+		SolutionKey string
 	}{
 		problem.Day.Url,
 		problem.Day.Aoc.Year,
 		problem.Day.Number,
 		problem.Number,
+		problem.GetSolutionKey(),
 	}
 
 	filemanager.CreateFileFromTemplate(problemFilePath, constants.ProblemTemplateFile, tplData)
 
 	return problemFilePath
+}
+
+func (problem *Problem) GetSolutionKey() string {
+	return fmt.Sprintf("%d_%02d_%d", problem.Day.Aoc.Year, problem.Day.Number, problem.Number)
 }

@@ -1,6 +1,21 @@
 package problems
 
+import (
+	"strconv"
+	"strings"
+)
+
+func init() {
+	solutions["{{.SolutionKey}}"] = year{{.Year}}Day{{.Day}}Problem{{.Problem}}
+}
+
 // {{.URL}}
-func Year{{.Year}}Day{{.Day}}Problem{{.Problem}}(input []string) string {
-	return "Not implemented"
+func year{{.Year}}Day{{.Day}}Problem{{.Problem}}(input []string) string {
+	resp := 0
+
+	for _, line := range input {
+		values := strings.Split(line, " ")
+	}
+
+	return strconv.Itoa(resp)
 }

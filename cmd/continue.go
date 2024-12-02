@@ -4,7 +4,6 @@ import (
 	"os/exec"
 	advent "tikoflano/aoc/lib/aoc"
 	"tikoflano/aoc/lib/constants"
-	"tikoflano/aoc/lib/filemanager"
 
 	"github.com/spf13/cobra"
 )
@@ -20,17 +19,6 @@ var continueCmd = &cobra.Command{
 
 		problemFilePath := nextProblem.MakeProblemFile()
 		nextProblem.Day.DownloadInput(aoc.Client)
-
-		tplData := struct {
-			Year    int
-			Day     int
-			Problem int
-		}{
-			nextProblem.Day.Aoc.Year,
-			nextProblem.Day.Number,
-			nextProblem.Number,
-		}
-		filemanager.CreateFileFromTemplate(constants.ProblemsFile, constants.ProblemsTemplateFile, tplData)
 
 		cmnd := exec.Command(constants.VSCodeExecutable, problemFilePath)
 		cmnd.Start()

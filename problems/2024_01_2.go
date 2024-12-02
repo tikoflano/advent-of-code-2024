@@ -5,8 +5,12 @@ import (
 	"strings"
 )
 
+func init() {
+	solutions["2024_01_2"] = year2024Day1Problem2
+}
+
 // https://adventofcode.com/2024/day/1
-func Year2024Day1Problem2(input []string) string {
+func year2024Day1Problem2(input []string) string {
 	var leftList, rightList []int
 
 	for _, line := range input {
