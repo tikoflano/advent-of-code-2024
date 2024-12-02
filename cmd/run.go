@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"strings"
 	advent "tikoflano/aoc/lib/aoc"
 	"tikoflano/aoc/lib/constants"
 	"tikoflano/aoc/problems"
@@ -19,7 +20,8 @@ var runCmd = &cobra.Command{
 		nextProblem := aoc.NextDay().NextProblem()
 
 		input := nextProblem.GetInput()
-		output := problems.Run(input)
+		inputLines := strings.Split(input, "\n")
+		output := problems.Run(inputLines)
 
 		fmt.Println(output)
 	},
