@@ -41,7 +41,7 @@ func (problem *Problem) MakeProblemFile() string {
 		Problem     int
 		SolutionKey string
 	}{
-		problem.Day.Url,
+		problem.GetURL(),
 		problem.Day.Aoc.Year,
 		problem.Day.Number,
 		problem.Number,
@@ -55,4 +55,12 @@ func (problem *Problem) MakeProblemFile() string {
 
 func (problem *Problem) GetSolutionKey() string {
 	return fmt.Sprintf("%d_%02d_%d", problem.Day.Aoc.Year, problem.Day.Number, problem.Number)
+}
+
+func (problem *Problem) GetURL() string {
+	if problem.Number == 1 {
+		return problem.Day.Url
+	}
+
+	return fmt.Sprintf("%s#part%d", problem.Day.Url, problem.Number)
 }

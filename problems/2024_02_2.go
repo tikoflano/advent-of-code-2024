@@ -11,7 +11,7 @@ func init() {
 	solutions["2024_02_2"] = year2024Day2Problem2
 }
 
-// https://adventofcode.com/2024/day/2
+// https://adventofcode.com/2024/day/2#part2
 func year2024Day2Problem2(input []string) string {
 	safe := 0
 

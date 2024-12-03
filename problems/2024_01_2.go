@@ -9,7 +9,7 @@ func init() {
 	solutions["2024_01_2"] = year2024Day1Problem2
 }
 
-// https://adventofcode.com/2024/day/1
+// https://adventofcode.com/2024/day/1#part2
 func year2024Day1Problem2(input []string) string {
 	var leftList, rightList []int
 
