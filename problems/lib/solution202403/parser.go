@@ -12,6 +12,7 @@ const (
 	ParsingOperator
 )
 
+var validCommandRegex = regexp.MustCompile(`[a-z']`)
 var validOperandRegex = regexp.MustCompile(`[0-9]`)
 
 type parser struct {
@@ -38,7 +39,11 @@ func (parser *parser) NextChar(char string) {
 
 func (parser *parser) parseCommand(char string) {
 	if char != "(" {
-		parser.buffer += char
+		if validCommandRegex.MatchString(char) {
+			parser.buffer += char
+		} else {
+			parser.clearBuffer()
+		}
 		return
 	}
 
