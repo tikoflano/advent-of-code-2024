@@ -5,6 +5,7 @@ import (
 	"slices"
 	"strconv"
 	"strings"
+	"tikoflano/aoc/problems/lib/solution202402"
 )
 
 func init() {
@@ -46,7 +47,7 @@ func validateSafeLevels(levels []string) bool {
 
 		// Set direction if it is not already set
 		if isAscending == nil {
-			isAscending = boolPtr(diff > 0)
+			isAscending = solution202402.BoolPtr(diff > 0)
 		}
 
 		// Too low or high diff

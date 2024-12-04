@@ -4,14 +4,11 @@ import (
 	"math"
 	"strconv"
 	"strings"
+	"tikoflano/aoc/problems/lib/solution202402"
 )
 
 func init() {
 	solutions["2024_02_1"] = year2024Day2Problem1
-}
-
-func boolPtr(b bool) *bool {
-	return &b
 }
 
 // https://adventofcode.com/2024/day/2
@@ -32,7 +29,7 @@ func year2024Day2Problem1(input []string) string {
 
 			// Set direction if it is not already set
 			if isAscending == nil {
-				isAscending = boolPtr(diff > 0)
+				isAscending = solution202402.BoolPtr(diff > 0)
 			}
 
 			// Too low or high diff
