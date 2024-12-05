@@ -14,7 +14,7 @@ func year{{.Year}}Day{{.Day}}Problem{{.Problem}}(input []string) string {
 	resp := 0
 
 	for _, line := range input {
-		values := strings.Split(line, " ")
+		
 	}
 
 	return strconv.Itoa(resp)
