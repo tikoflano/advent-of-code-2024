@@ -9,11 +9,11 @@ import (
 )
 
 func init() {
-	solutions["2024_01_1"] = year2024Day1Problem1
+	solutions["2024_01_1"] = year2024Day01Problem1
 }
 
 // https://adventofcode.com/2024/day/1
-func year2024Day1Problem1(input []string) string {
+func year2024Day01Problem1(input []string) string {
 	var leftList, rightList []int
 
 	for _, line := range input {

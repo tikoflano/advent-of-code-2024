@@ -6,11 +6,11 @@ import (
 )
 
 func init() {
-	solutions["2024_04_1"] = year2024Day4Problem1
+	solutions["2024_04_1"] = year2024Day04Problem1
 }
 
 // https://adventofcode.com/2024/day/4
-func year2024Day4Problem1(input []string) string {
+func year2024Day04Problem1(input []string) string {
 	resp := 0
 
 	for y, line := range input {

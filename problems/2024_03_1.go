@@ -6,11 +6,11 @@ import (
 )
 
 func init() {
-	solutions["2024_03_1"] = year2024Day3Problem1
+	solutions["2024_03_1"] = year2024Day03Problem1
 }
 
 // https://adventofcode.com/2024/day/3
-func year2024Day3Problem1(input []string) string {
+func year2024Day03Problem1(input []string) string {
 	resp := 0
 	re := regexp.MustCompile(`mul\(([0-9]{1,3}),([0-9]{1,3})\)`)
 

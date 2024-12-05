@@ -8,11 +8,11 @@ import (
 )
 
 func init() {
-	solutions["2024_02_1"] = year2024Day2Problem1
+	solutions["2024_02_1"] = year2024Day02Problem1
 }
 
 // https://adventofcode.com/2024/day/2
-func year2024Day2Problem1(input []string) string {
+func year2024Day02Problem1(input []string) string {
 	safe := 0
 
 	for _, line := range input {
