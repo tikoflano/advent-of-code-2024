@@ -12,6 +12,8 @@ func init() {
 // https://adventofcode.com/2024/day/4
 func year2024Day04Problem1(input []string) string {
 	resp := 0
+	wordSearch := sol.NewWordSearch(input)
+	const wordToSearch = "XMAS"
 
 	for y, line := range input {
 		for x, mapLetter := range line {
@@ -22,7 +24,7 @@ func year2024Day04Problem1(input []string) string {
 			curPos := sol.Vector{X: x, Y: y}
 
 			for _, direction := range sol.Directions {
-				if sol.CheckFromPositionAndDirection("XMAS", input, &curPos, direction) {
+				if wordSearch.CheckWordFromPositionAndDirection(wordToSearch, &curPos, direction) {
 					resp++
 				}
 			}

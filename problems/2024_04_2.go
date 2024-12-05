@@ -12,6 +12,7 @@ func init() {
 // https://adventofcode.com/2024/day/4#part2
 func year2024Day04Problem2(input []string) string {
 	resp := 0
+	wordSearch := sol.NewWordSearch(input)
 
 	for y, line := range input {
 		for x, mapLetter := range line {
@@ -25,19 +26,19 @@ func year2024Day04Problem2(input []string) string {
 			swPos := curPos.Add(sol.Directions["SW"])
 			sePos := curPos.Add(sol.Directions["SE"])
 
-			nwLetter, err := sol.GetMapLetter(input, nwPos)
+			nwLetter, err := wordSearch.GetLetterAt(nwPos)
 			if err != nil {
 				continue
 			}
-			neLetter, err := sol.GetMapLetter(input, nePos)
+			neLetter, err := wordSearch.GetLetterAt(nePos)
 			if err != nil {
 				continue
 			}
-			swLetter, err := sol.GetMapLetter(input, swPos)
+			swLetter, err := wordSearch.GetLetterAt(swPos)
 			if err != nil {
 				continue
 			}
-			seLetter, err := sol.GetMapLetter(input, sePos)
+			seLetter, err := wordSearch.GetLetterAt(sePos)
 			if err != nil {
 				continue
 			}
