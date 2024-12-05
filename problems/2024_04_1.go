@@ -14,7 +14,11 @@ func year2024Day4Problem1(input []string) string {
 	resp := 0
 
 	for y, line := range input {
-		for x := range line {
+		for x, mapLetter := range line {
+			if string(mapLetter) != "X" {
+				continue
+			}
+
 			curPos := lib.Vector{X: x, Y: y}
 
 			for _, direction := range lib.Directions {
