@@ -2,7 +2,6 @@ package problems
 
 import (
 	"strconv"
-	"strings"
 )
 
 func init() {
