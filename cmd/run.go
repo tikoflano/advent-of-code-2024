@@ -51,7 +51,9 @@ var runCmd = &cobra.Command{
 		inputLines := strings.Split(input, "\n")
 
 		// Remove the trailing empty line
-		inputLines = inputLines[:len(inputLines)-1]
+		if inputLines[len(inputLines)-1] == "" {
+			inputLines = inputLines[:len(inputLines)-1]
+		}
 
 		output, err := problems.Run(problemToRun.GetSolutionKey(), inputLines)
 		utils.CheckError(err, "Failed to run solution")
