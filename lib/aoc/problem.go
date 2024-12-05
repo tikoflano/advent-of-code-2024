@@ -19,7 +19,7 @@ func (problem Problem) String() string {
 		solved = "⭐"
 	}
 
-	return fmt.Sprintf("Day %d, Problem %d: %s", problem.Day.Number, problem.Number, solved)
+	return fmt.Sprintf("Day %02d, Problem %d: %s", problem.Day.Number, problem.Number, solved)
 }
 
 func (problem *Problem) getProblemFilePath() string {
@@ -37,13 +37,13 @@ func (problem *Problem) MakeProblemFile() string {
 	tplData := struct {
 		URL         string
 		Year        int
-		Day         int
+		Day         string
 		Problem     int
 		SolutionKey string
 	}{
 		problem.GetURL(),
 		problem.Day.Aoc.Year,
-		problem.Day.Number,
+		fmt.Sprintf("%02d", problem.Day.Number),
 		problem.Number,
 		problem.GetSolutionKey(),
 	}
