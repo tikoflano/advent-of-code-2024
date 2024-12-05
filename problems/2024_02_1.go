@@ -4,7 +4,7 @@ import (
 	"math"
 	"strconv"
 	"strings"
-	"tikoflano/aoc/problems/lib/solution202402"
+	sol "tikoflano/aoc/problems/lib/solution202402"
 )
 
 func init() {
@@ -29,7 +29,7 @@ func year2024Day2Problem1(input []string) string {
 
 			// Set direction if it is not already set
 			if isAscending == nil {
-				isAscending = solution202402.BoolPtr(diff > 0)
+				isAscending = sol.BoolPtr(diff > 0)
 			}
 
 			// Too low or high diff

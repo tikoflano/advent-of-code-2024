@@ -2,7 +2,7 @@ package problems
 
 import (
 	"strconv"
-	lib "tikoflano/aoc/problems/lib/solution202404"
+	sol "tikoflano/aoc/problems/lib/solution202404"
 )
 
 func init() {
@@ -19,10 +19,10 @@ func year2024Day4Problem1(input []string) string {
 				continue
 			}
 
-			curPos := lib.Vector{X: x, Y: y}
+			curPos := sol.Vector{X: x, Y: y}
 
-			for _, direction := range lib.Directions {
-				if lib.CheckFromPositionAndDirection("XMAS", input, &curPos, direction) {
+			for _, direction := range sol.Directions {
+				if sol.CheckFromPositionAndDirection("XMAS", input, &curPos, direction) {
 					resp++
 				}
 			}

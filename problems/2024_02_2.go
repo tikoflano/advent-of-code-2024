@@ -4,7 +4,7 @@ import (
 	"slices"
 	"strconv"
 	"strings"
-	"tikoflano/aoc/problems/lib/solution202402"
+	sol "tikoflano/aoc/problems/lib/solution202402"
 )
 
 func init() {
@@ -18,13 +18,13 @@ func year2024Day2Problem2(input []string) string {
 	for _, line := range input {
 		values := strings.Split(line, " ")
 
-		if solution202402.ValidateSafeLevels(values) {
+		if sol.ValidateSafeLevels(values) {
 			safe++
 			continue
 		}
 
 		for i := 0; i < len(values); i++ {
-			if solution202402.ValidateSafeLevels(slices.Concat(values[:i], values[i+1:])) {
+			if sol.ValidateSafeLevels(slices.Concat(values[:i], values[i+1:])) {
 				safe++
 				break
 			}

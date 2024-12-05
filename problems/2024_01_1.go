@@ -5,7 +5,7 @@ import (
 	"slices"
 	"strconv"
 	"strings"
-	"tikoflano/aoc/problems/lib/solution202401"
+	sol "tikoflano/aoc/problems/lib/solution202401"
 )
 
 func init() {
@@ -26,8 +26,8 @@ func year2024Day1Problem1(input []string) string {
 		rightList = append(rightList, valueRight)
 	}
 
-	slices.SortFunc(leftList, solution202401.Cmp)
-	slices.SortFunc(rightList, solution202401.Cmp)
+	slices.SortFunc(leftList, sol.Cmp)
+	slices.SortFunc(rightList, sol.Cmp)
 
 	diff := 0
 	for index := range leftList {

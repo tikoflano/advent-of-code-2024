@@ -2,7 +2,7 @@ package problems
 
 import (
 	"strconv"
-	lib "tikoflano/aoc/problems/lib/solution202404"
+	sol "tikoflano/aoc/problems/lib/solution202404"
 )
 
 func init() {
@@ -19,25 +19,25 @@ func year2024Day4Problem2(input []string) string {
 				continue
 			}
 
-			curPos := lib.Vector{X: x, Y: y}
-			nwPos := curPos.Add(lib.Directions["NW"])
-			nePos := curPos.Add(lib.Directions["NE"])
-			swPos := curPos.Add(lib.Directions["SW"])
-			sePos := curPos.Add(lib.Directions["SE"])
+			curPos := sol.Vector{X: x, Y: y}
+			nwPos := curPos.Add(sol.Directions["NW"])
+			nePos := curPos.Add(sol.Directions["NE"])
+			swPos := curPos.Add(sol.Directions["SW"])
+			sePos := curPos.Add(sol.Directions["SE"])
 
-			nwLetter, err := lib.GetMapLetter(input, nwPos)
+			nwLetter, err := sol.GetMapLetter(input, nwPos)
 			if err != nil {
 				continue
 			}
-			neLetter, err := lib.GetMapLetter(input, nePos)
+			neLetter, err := sol.GetMapLetter(input, nePos)
 			if err != nil {
 				continue
 			}
-			swLetter, err := lib.GetMapLetter(input, swPos)
+			swLetter, err := sol.GetMapLetter(input, swPos)
 			if err != nil {
 				continue
 			}
-			seLetter, err := lib.GetMapLetter(input, sePos)
+			seLetter, err := sol.GetMapLetter(input, sePos)
 			if err != nil {
 				continue
 			}
@@ -45,7 +45,7 @@ func year2024Day4Problem2(input []string) string {
 			word1 := nwLetter + "A" + seLetter
 			word2 := neLetter + "A" + swLetter
 
-			if lib.IsMas(word1) && lib.IsMas(word2) {
+			if sol.IsMas(word1) && sol.IsMas(word2) {
 				resp++
 			}
 		}
