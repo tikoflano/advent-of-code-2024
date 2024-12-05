@@ -18,6 +18,7 @@ var continueCmd = &cobra.Command{
 		nextProblem := aoc.NextDay().NextProblem()
 
 		problemFilePath := nextProblem.MakeProblemFile()
+		nextProblem.Day.MakeDayUtilsPackage()
 		nextProblem.Day.DownloadInput(aoc.Client)
 
 		cmnd := exec.Command(constants.VSCodeExecutable, problemFilePath)

@@ -77,3 +77,28 @@ func (day *Day) GetInput() (string, bool) {
 
 	return filemanager.ReadFile(inputFile), true
 }
+
+func (day *Day) getUtilsFilePath() string {
+	return fmt.Sprintf("problems/lib/solution%d%02d/utils.go", day.Aoc.Year, day.Number)
+}
+
+func (day *Day) MakeDayUtilsPackage() string {
+	utilsFilePath := day.getUtilsFilePath()
+	exists := filemanager.FileExists(utilsFilePath)
+
+	if exists {
+		return utilsFilePath
+	}
+
+	tplData := struct {
+		Year int
+		Day  string
+	}{
+		day.Aoc.Year,
+		fmt.Sprintf("%02d", day.Number),
+	}
+
+	filemanager.CreateFileFromTemplate(utilsFilePath, constants.DayUtilsTemplateFile, tplData)
+
+	return utilsFilePath
+}

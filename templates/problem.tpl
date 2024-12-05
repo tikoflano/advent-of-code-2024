@@ -2,6 +2,7 @@ package problems
 
 import (
 	"strconv"
+	sol "tikoflano/aoc/problems/lib/solution{{.Year}}{{.Day}}"
 )
 
 func init() {
