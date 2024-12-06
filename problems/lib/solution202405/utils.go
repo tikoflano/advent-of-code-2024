@@ -6,8 +6,10 @@ import (
 	"strings"
 )
 
-func CreateRules(input []string) (map[string][]string, int) {
-	rules := map[string][]string{}
+type Rules map[string][]string
+
+func CreateRules(input []string) (Rules, int) {
+	rules := Rules{}
 	lineNumber := 0
 
 	// Parse rules
