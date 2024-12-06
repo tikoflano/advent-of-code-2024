@@ -56,7 +56,11 @@ func (problem *Problem) MakeProblemFile() string {
 // Using variadic args only to allow empty calls, only 1 alt value is exptected and used
 func (problem *Problem) GetSolutionKey(alt ...string) string {
 	suffix := ""
-	if alt[0] != "" {
+	if len(alt) > 1 {
+		panic("invalid call to GetSolutionKey, only 0 or 1 arguments are allowed")
+	}
+
+	if len(alt) == 1 && alt[0] != "" {
 		suffix = "_alternative_" + alt[0]
 	}
 	return fmt.Sprintf("%d_%02d_%d%s", problem.Day.Aoc.Year, problem.Day.Number, problem.Number, suffix)
