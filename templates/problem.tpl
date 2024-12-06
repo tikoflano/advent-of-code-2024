@@ -11,10 +11,10 @@ func init() {
 
 // {{.URL}}
 func year{{.Year}}Day{{.Day}}Problem{{.Problem}}(input []string) string {
-	resp := 0
+	var resp
 
 	for _, line := range input {
-		
+
 	}
 
 	return strconv.Itoa(resp)
