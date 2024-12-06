@@ -23,12 +23,13 @@ var runCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		aoc := advent.NewAdventOfCode(constants.Year)
 		problemToRun := aoc.NextDay().NextProblem()
+		alt := ""
 
 		if len(args) > 0 && args[0] != "" {
 			filename := strings.Split(args[0], ".")[0]
 			parts := strings.Split(filename, "_")
 
-			if len(parts) == 3 {
+			if len(parts) == 3 || len(parts) == 5 {
 				log.Printf("Running file: %s", args[0])
 				dayNumber, err := strconv.Atoi(parts[1])
 				utils.CheckError(err, "Failed to parse the day value")
@@ -37,6 +38,11 @@ var runCmd = &cobra.Command{
 				utils.CheckError(err, "Failed to parse the problem value")
 
 				problemToRun = &aoc.Days[dayNumber-1].Problems[problemNumber-1]
+
+				// Alternative solution file called
+				if len(parts) == 5 {
+					alt = parts[4]
+				}
 			} else {
 				log.Printf("Invalid file to run: '%s', defaulting to next problem", args[0])
 			}
@@ -55,7 +61,7 @@ var runCmd = &cobra.Command{
 			inputLines = inputLines[:len(inputLines)-1]
 		}
 
-		output, err := problems.Run(problemToRun.GetSolutionKey(), inputLines)
+		output, err := problems.Run(problemToRun.GetSolutionKey(alt), inputLines)
 		utils.CheckError(err, "Failed to run solution")
 
 		fmt.Printf("Result: %s\n", output)

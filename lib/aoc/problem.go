@@ -53,8 +53,13 @@ func (problem *Problem) MakeProblemFile() string {
 	return problemFilePath
 }
 
-func (problem *Problem) GetSolutionKey() string {
-	return fmt.Sprintf("%d_%02d_%d", problem.Day.Aoc.Year, problem.Day.Number, problem.Number)
+// Using variadic args only to allow empty calls, only 1 alt value is exptected and used
+func (problem *Problem) GetSolutionKey(alt ...string) string {
+	suffix := ""
+	if alt[0] != "" {
+		suffix = "_alternative_" + alt[0]
+	}
+	return fmt.Sprintf("%d_%02d_%d%s", problem.Day.Aoc.Year, problem.Day.Number, problem.Number, suffix)
 }
 
 func (problem *Problem) GetURL() string {
