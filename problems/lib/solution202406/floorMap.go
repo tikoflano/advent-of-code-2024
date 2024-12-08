@@ -2,6 +2,7 @@ package solution202406
 
 import (
 	"errors"
+	"sync"
 )
 
 type FloorMap struct {
@@ -40,6 +41,24 @@ func NewFloorMap(input []string) (*FloorMap, *Vector) {
 	return &floorMap, startPos
 }
 
+func (floorMap *FloorMap) Clone() FloorMap {
+	clone := FloorMap{
+		Width:  floorMap.Width,
+		Height: floorMap.Height,
+		Layout: [][]*Cell{},
+	}
+
+	for y, row := range floorMap.Layout {
+		clone.Layout = append(clone.Layout, []*Cell{})
+		for _, cell := range row {
+			clonedCell := cell.Clone()
+			clone.Layout[y] = append(clone.Layout[y], &clonedCell)
+		}
+	}
+
+	return clone
+}
+
 func (floorMap *FloorMap) Look(pos *Vector, dir *Vector) (*Cell, error) {
 	targetPos := pos.Add(dir)
 
@@ -63,17 +82,29 @@ func (floorMap *FloorMap) GetCell(pos *Vector) *Cell {
 	return floorMap.Layout[pos.Y][pos.X]
 }
 
-func (floorMap *FloorMap) CheckVisitedInPath(pos *Vector, dir *Vector) bool {
+func (floorMap *FloorMap) CheckIfExits(startingPos Vector, startingDir Vector, c chan int, wg *sync.WaitGroup) {
+	defer wg.Done()
+	pos := &startingPos
+	dir := &startingDir
+
 	for {
-		nextCell, err := floorMap.Look(pos, dir)
+		if curCell := floorMap.GetCell(pos); curCell.IsVisitedFromDir(dir) {
+			c <- 1
+			return
+		} else {
+			curCell.AddVisit(dir)
+		}
+
+		targetCell, err := floorMap.Look(pos, dir)
 		if err != nil {
-			return false
+			c <- 0
+			return
 		}
 
-		if nextCell.IsVisitedFromDir(dir) {
-			return true
+		if targetCell.Free {
+			pos = targetCell.Pos
+		} else {
+			dir = dir.Rotate90()
 		}
-
-		pos = nextCell.Pos
 	}
 }

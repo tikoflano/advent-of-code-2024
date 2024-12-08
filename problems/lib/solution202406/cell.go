@@ -5,10 +5,22 @@ import (
 	"slices"
 )
 
-type Cell struct{
-	Pos *Vector
+type Cell struct {
+	Pos     *Vector
 	Visited []*Vector
-	Free bool
+	Free    bool
+}
+
+func (cell *Cell) Clone() Cell {
+	clone := Cell{
+		Pos:     cell.Pos,
+		Free:    cell.Free,
+		Visited: []*Vector{},
+	}
+
+	clone.Visited = append(clone.Visited, cell.Visited...)
+
+	return clone
 }
 
 func (cell *Cell) IsVisited() bool {
@@ -26,7 +38,7 @@ func (cell *Cell) IsVisitedFromDir(dir *Vector) bool {
 }
 
 func (cell *Cell) AddVisit(dir *Vector) {
-	if !slices.Contains(cell.Visited, dir){
+	if !slices.Contains(cell.Visited, dir) {
 		cell.Visited = append(cell.Visited, dir)
 	}
 }

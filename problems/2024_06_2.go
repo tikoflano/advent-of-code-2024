@@ -2,6 +2,7 @@ package problems
 
 import (
 	"strconv"
+	"sync"
 	sol "tikoflano/aoc/problems/lib/solution202406"
 )
 
@@ -12,29 +13,27 @@ func init() {
 // https://adventofcode.com/2024/day/6#part2
 func year2024Day06Problem2(input []string) string {
 	var resp int
-	floorMap, pos := sol.NewFloorMap(input)
-	dir := sol.Directions.N
+	c := make(chan int)
+	var wg sync.WaitGroup
+	floorMap, startingPos := sol.NewFloorMap(input)
+	startingDir := sol.Directions.N
 
-	for {
-		if curCell := floorMap.GetCell(pos); !curCell.IsVisited() {
-			curCell.AddVisit(dir)
-		}
+	// Tried a bunch of things that didn't work, just brute force it! Takes ~35 secs
+	for _, row := range floorMap.Layout {
+		for _, cell := range row {
+			if cell.Free && (cell.Pos.X != startingPos.X || cell.Pos.Y != startingPos.Y) {
+				clonedFloorMap := floorMap.Clone()
+				clonedFloorMap.GetCell(cell.Pos).Free = false
 
-		targetCell, err := floorMap.Look(pos, dir)
-		if err != nil {
-			break
-		}
-
-		if targetCell.Free {
-			// Imagine there is an obstacle, check if that will put us back in an already visited cell facing the same direction
-			fakeDir := dir.Rotate90()
-			if floorMap.CheckVisitedInPath(pos, fakeDir) {
-				resp++
+				wg.Add(1)
+				go clonedFloorMap.CheckIfExits(*startingPos, *startingDir, c, &wg)
 			}
-			pos = targetCell.Pos
-		} else {
-			dir = dir.Rotate90()
 		}
+	}
+
+	go sol.WaitAndClose(c, &wg)
+	for val := range c {
+		resp += val
 	}
 
 	return strconv.Itoa(resp)
