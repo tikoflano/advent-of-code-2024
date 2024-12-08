@@ -4,6 +4,7 @@ import (
 	"slices"
 	"strconv"
 	"strings"
+	"sync"
 )
 
 type Rules map[string][]string
@@ -69,4 +70,17 @@ func GetMiddleValue(s []string) int {
 	val, _ := strconv.Atoi(middleVal)
 
 	return val
+}
+
+func WaitAndClose[T interface{}](c chan T, wg *sync.WaitGroup) {
+	wg.Wait()
+	close(c)
+}
+
+func CheckUpdate(update []string, rules Rules, c chan int, wg *sync.WaitGroup) {
+	defer wg.Done()
+
+	if CheckCorrectOrder(update, rules) {
+		c <- GetMiddleValue(update)
+	}
 }

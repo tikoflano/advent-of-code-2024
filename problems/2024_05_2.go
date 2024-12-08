@@ -3,7 +3,7 @@ package problems
 import (
 	"strconv"
 	"strings"
-	lib "tikoflano/aoc/problems/lib/solution202405"
+	sol "tikoflano/aoc/problems/lib/solution202405"
 )
 
 func init() {
@@ -13,15 +13,15 @@ func init() {
 // https://adventofcode.com/2024/day/5#part2
 func year2024Day05Problem2(input []string) string {
 	resp := 0
-	rules, lineNumber := lib.CreateRules(input)
+	rules, lineNumber := sol.CreateRules(input)
 
 	// Fix updates
 	for _, line := range input[lineNumber:] {
 		update := strings.Split(line, ",")
 
-		if !lib.CheckCorrectOrder(update, rules) {
-			lib.FixOrder(update, rules)
-			resp += lib.GetMiddleValue(update)
+		if !sol.CheckCorrectOrder(update, rules) {
+			sol.FixOrder(update, rules)
+			resp += sol.GetMiddleValue(update)
 		}
 	}
 
