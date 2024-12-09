@@ -11,7 +11,7 @@ func init() {
 
 // {{.URL}}
 func year{{.Year}}Day{{.Day}}Problem{{.Problem}}(input []string) string {
-	var resp
+	var resp int
 
 	for _, line := range input {
 
