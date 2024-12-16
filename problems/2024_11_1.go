@@ -3,7 +3,7 @@ package problems
 import (
 	"strconv"
 	"strings"
-	// sol "tikoflano/aoc/problems/lib/solution202411"
+	sol "tikoflano/aoc/problems/lib/solution202411"
 )
 
 func init() {
@@ -13,35 +13,29 @@ func init() {
 // https://adventofcode.com/2024/day/11
 func year2024Day11Problem1(input []string) string {
 	values := strings.Split(input[0], " ")
-	blinks := 25
+	times := 25
 
-	for blink := 0; blink < blinks; blink++ {
-		for i := 0; i < len(values); i++ {
-			cur := values[i]
-
-			if cur == "0" {
-				values[i] = "1"
-			} else if len(cur)%2 == 0 {
-				left := cur[:(len(cur) / 2)]
-				right := cur[(len(cur) / 2):]
-
-				for len(right) > 1 && strings.HasPrefix(right, "0") {
-					right = strings.TrimPrefix(right, "0")
-				}
-
-				newElements := []string{left, right}
-				values = append(values[:i], append(newElements, values[i+1:]...)...)
-
-				i++
-			} else {
-				value, _ := strconv.Atoi(cur)
-				value *= 2024
-
-				newElements := []string{strconv.Itoa(value)}
-				values = append(values[:i], append(newElements, values[i+1:]...)...)
-			}
-		}
+	head := &sol.Node1{
+		Value: values[0],
 	}
 
-	return strconv.Itoa(len(values))
+	currentNode := head
+	for i := 1; i < len(values); i++ {
+		next := &sol.Node1{
+			Value: values[i],
+		}
+
+		currentNode.Next = next
+		currentNode = next
+	}
+
+	var nextNode *sol.Node1
+	currentNode = head
+	for currentNode != nil {
+		nextNode = currentNode.Next
+		currentNode.Blink(times)
+		currentNode = nextNode
+	}
+
+	return strconv.Itoa(head.LengthToTail())
 }
